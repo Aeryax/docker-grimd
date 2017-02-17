@@ -12,10 +12,14 @@ RUN apt-get update && \
 ADD https://github.com/looterz/grimd/releases/download/v${version}/grimd_linux_x64 /bin/grimd
 
 # Chmod binary
-RUN chmod a+x /bin/grimd
+RUN chmod a+x /bin/grimd && \
+  mkdir -p ~/grimd/config
 
-# Forward apporpriate ports
-EXPOSE 53/udp 53/tcp
+# Copy custom config file to volume
+COPY grimd.toml ~/grimd/config/grimd.toml
+
+# Forward appropriate ports
+EXPOSE 53/udp 53/tcp 8080/tcp
 
 # Run grimd
-ENTRYPOINT ["/bin/grimd", "-update"]
+ENTRYPOINT ["/bin/grimd", "-config", "~/grimd/config/grimd.toml", "-update"]
