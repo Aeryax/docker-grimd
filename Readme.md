@@ -8,8 +8,14 @@
 
 The recommended way to run this container is as follows:
 
+from ubuntu image:
 ```bash
 $ docker run -d --name grimd -p 53:53/tcp -p 53:53/udp aeryax/grimd
+```
+
+from alpine image (**WIP**):
+```bash
+$ docker run -d --name grimd -p 53:53/tcp -p 53:53/udp aeryax/grimd:alpine
 ```
 
 ## Parameters
